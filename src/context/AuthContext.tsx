@@ -31,23 +31,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  const login = async (login: string, password: string) => {
-    try {
-      const response = await api.post<{ token: string }>('/auth/login', { login, password });
-      const { token } = response.data;
-      localStorage.setItem('jwt_token', token);
-      const decoded: JwtPayload = jwtDecode(token);
-      setUser({
-        id: Number(decoded.nameid),
-        login: decoded.Login || decoded.sub,
-        role: decoded.role,
-      });
-      return { success: true };
-    } catch (error: unknown) {
-      const axiosError = error as AxiosError<{ message?: string }>;
-      return { success: false, message: axiosError.response?.data?.message || 'Ошибка' };
-    }
-  };
+const login = async (login: string, password: string) => {
+  try {
+    const response = await api.post<{ token: string }>('/auth/login', { login, password });
+    const { token } = response.data;
+    localStorage.setItem('jwt_token', token);
+    const decoded: JwtPayload = jwtDecode(token);
+    setUser({
+      id: Number(decoded.nameid),
+      login: decoded.Login || decoded.sub,
+      role: decoded.role,
+      fullName: (decoded  )?.FullName ??"" // ✅ Если добавите FullName в JWT claims
+    });
+    return { success: true };
+  } catch (error: unknown) {
+    const axiosError = error as AxiosError<{ message?: string }>;
+    return { success: false, message: axiosError.response?.data?.message || 'Ошибка' };
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('jwt_token');
