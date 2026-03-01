@@ -780,9 +780,7 @@ const WorkReports = () => {
                   const currentQuantity = isEditing
                     ? editingQuantity
                     : report.quantity;
-                  const currentComment = isEditing
-                    ? editingComment
-                    : report.comment || "—";
+          
                   const currentTotal = currentQuantity * report.pricePerUnit;
 
                   return (

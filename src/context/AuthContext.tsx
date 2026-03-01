@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser({
             id: Number(decoded.nameid),
             login: decoded.Login || decoded.sub,
-            role: decoded.role,
+            role: decoded.role,fullName:""
           });
         }
       } catch {
