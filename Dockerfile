@@ -35,9 +35,9 @@ RUN npm ci --only=production && npm install -g serve
 # Копируем собранное приложение из builder
 COPY --from=builder /app/dist ./dist
 
-# Открываем порт 3000
-EXPOSE 3000
+# Открываем порт 80
+EXPOSE 80
 
 # Запускаем serve для раздачи статических файлов
 # -s означает SPA режим (перенаправляет все запросы на index.html)
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "80"]
