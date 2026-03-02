@@ -1,7 +1,7 @@
 import axios, {    AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 // Убедитесь, что порт соответствует тому, на котором запускается .NET API
-const API_URL = 'https://localhost:7118/api'; 
+const API_URL = "/api"//||'https://localhost:7118/api'; 
 
 const api = axios.create({
   baseURL: API_URL,
