@@ -34,7 +34,12 @@ jobs:
             CI=true docker compose build frontend
             echo "✅ Docker build done at $(date +%T)"
             
-            echo ">>> Step 3/4: Docker up"
+            echo ">>> Step 3.0/4: Docker compose DOWN"
+            docker compose down
+            echo "✅ Docker compose DOWN at $(date +%T)"
+
+
+            echo ">>> Step 3.1/4: Docker up"
             docker compose up -d frontend
             echo "✅ Docker up done at $(date +%T)"
             
