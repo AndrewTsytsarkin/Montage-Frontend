@@ -6,17 +6,19 @@ FROM node:20-alpine AS builder
 # Рабочая директория
 WORKDIR /app
 
+# 🔥 Ключевое: включаем CI-режим для npm
+ENV CI=true
+
 # Копируем package files
 COPY package*.json ./
 
 # Устанавливаем все зависимости (включая dev для сборки)
-RUN npm ci
-
+RUN npm ci --ci
 # Копируем исходный код
 COPY . .
 
 # Собираем приложение
-RUN npm run build
+RUN npm run build  --ci
 
 # ============================================
 # ЭТАП 2: Production (Production Stage)
