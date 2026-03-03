@@ -3,20 +3,11 @@ name: Deploy Frontend to VDS
 on:
   push:
     branches: [ main, master ]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'package*.json'
-      - 'vite.config.*'
-      - '.env.production'
-      - 'Dockerfile'
-      - '.github/workflows/deploy-frontend.yml'
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
     
     steps:
       - name: 📦 Checkout code
@@ -30,20 +21,38 @@ jobs:
           key: ${{ secrets.VDS_SSH_KEY }}
           port: 22
           script: |
-            echo "🔄 Starting frontend deployment..."
+            echo "🔍 Debug: Starting deployment..."
+            echo "User: $(whoami)"
+            echo "Home: $HOME"
+            echo "PWD: $(pwd)"
             
-            cd ${{ secrets.VDS_PROJECT_PATH }}/frontend
+            echo ""
+            echo "📁 Checking /opt/myapp/frontend:"
+            ls -la /opt/myapp/frontend/ || echo "❌ NOT FOUND!"
             
-            # Простое обновление кода
+            echo ""
+            echo "📁 Checking /opt/myapp/docker-compose.yml:"
+            ls -la /opt/myapp/docker-compose.yml || echo "❌ NOT FOUND!"
+            
+            echo ""
+            echo "🔧 Starting deployment..."
+            
+            # Переходим в папку фронтенда
+            cd /opt/myapp/frontend
+            echo "✅ Now in: $(pwd)"
+            
+            # Обновляем код
             git pull origin main
             
-            cd ..
+            # Переходим в корень проекта
+            cd /opt/myapp
             
-            # Пересборка и перезапуск
+            # Собираем и запускаем
             docker compose build --no-cache frontend
             docker compose up -d frontend
             
-            # Очистка старых образов
+            # Чистим старые образы
             docker image prune -f
             
-            echo "✅ Frontend deployment completed!"
+            echo ""
+            echo "✅ Deployment completed!"
