@@ -13,12 +13,12 @@ ENV CI=true
 COPY package*.json ./
 
 # Устанавливаем все зависимости (включая dev для сборки)
-RUN npm ci --ci
+RUN npm ci  
 # Копируем исходный код
 COPY . .
 
 # Собираем приложение
-RUN npm run build  --ci
+RUN npm run build  
 
 # ============================================
 # ЭТАП 2: Production (Production Stage)
