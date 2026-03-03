@@ -65,7 +65,7 @@ export interface WorkTypeDto {
   subtype: string;
   name: string;
   unit: string;
-  pricePerUnit: number; // НОВОЕ
+  pricePerUnit: number;  
 }
 
 export interface WorkReport {
@@ -81,8 +81,8 @@ export interface WorkReport {
   workDate: string;
   quantity: number;
   unit: string;
-  pricePerUnit: number; // НОВОЕ
-  totalPrice: number; // НОВОЕ
+  pricePerUnit: number;  
+  totalPrice: number; 
   comment?: string;
   createdAt: string;
   updatedAt?: string;

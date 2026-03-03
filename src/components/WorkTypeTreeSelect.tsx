@@ -1,4 +1,3 @@
-// src/components/WorkTypeTreeSelect.tsx
 import { useState, useMemo } from 'react';
 import type { WorkTypeDto } from '../types';
  
@@ -15,6 +14,7 @@ const WorkTypeTreeSelect = ({
   onChange,
   disabled = false
 }: WorkTypeTreeSelectProps) => {
+  
   // Состояние раскрытых элементов
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set());
   const [expandedSubtypes, setExpandedSubtypes] = useState<Set<string>>(new Set());

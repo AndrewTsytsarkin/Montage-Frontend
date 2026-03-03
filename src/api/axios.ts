@@ -1,16 +1,14 @@
 import axios, {    AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 // Убедитесь, что порт соответствует тому, на котором запускается .NET API
-const API_URL = "/api"//||'https://localhost:7118/api'; 
+const API_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const api = axios.create({
   baseURL: API_URL,
   headers: { 
     'Content-Type': 'application/json',
     'Accept': 'application/json'
-  },
-  // Для отладки можно включить передачу кредитов (куки), 
-  // но для JWT в заголовке это не обязательно
+  }, 
   withCredentials: false 
 });
 
