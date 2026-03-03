@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}>
-        <h2>🔐 Вход</h2>
+        <h2>🔐 Вход  в Систему</h2>
         {error && <div style={{ color: 'red' }}>{error}</div>}
         <input
           type="text"
