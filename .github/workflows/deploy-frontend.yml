@@ -1,25 +1,49 @@
-- name: 🚀 Deploy via SSH
-  uses: appleboy/ssh-action@v1.0.3
-  with:
-    host: ${{ secrets.VDS_HOST }}
-    username: ${{ secrets.VDS_USER }}
-    key: ${{ secrets.VDS_SSH_KEY }}
-    port: 22
-    script: |
-      echo "🔄 Starting frontend deployment..."
-      
-      cd ${{ secrets.VDS_PROJECT_PATH }}/frontend
-      
-      # Простое обновление кода
-      git pull origin main
-      
-      cd ..
-      
-      # Пересборка и перезапуск
-      docker compose build --no-cache frontend
-      docker compose up -d frontend
-      
-      # Очистка
-      docker image prune -f
-      
-      echo "✅ Frontend deployment completed!"
+name: Deploy Frontend to VDS
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package*.json'
+      - 'vite.config.*'
+      - '.env.production'
+      - 'Dockerfile'
+      - '.github/workflows/deploy-frontend.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+      - name: 📦 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VDS_HOST }}
+          username: ${{ secrets.VDS_USER }}
+          key: ${{ secrets.VDS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "🔄 Starting frontend deployment..."
+            
+            cd ${{ secrets.VDS_PROJECT_PATH }}/frontend
+            
+            # Простое обновление кода
+            git pull origin main
+            
+            cd ..
+            
+            # Пересборка и перезапуск
+            docker compose build --no-cache frontend
+            docker compose up -d frontend
+            
+            # Очистка старых образов
+            docker image prune -f
+            
+            echo "✅ Frontend deployment completed!"
