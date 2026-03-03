@@ -12,4 +12,7 @@ dist
 build
 *.md
 .vscode
-.idea
+.idea 
+.github
+.env.development
+.DS_Store
