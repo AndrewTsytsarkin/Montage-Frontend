@@ -6,7 +6,8 @@ import { useAuth } from "../context/AuthContext";
 
 import WorkTypeTreeSelect from "../components/WorkTypeTreeSelect";
 import { useObjectSelection } from "../context/src/context/ObjectSelectionContext";
-import type { WorkReport, WorkTypeDto } from "../types";
+import type { WorkReport } from "../types";
+import type { WorkTypeDto } from "../types/Dtos";
 
 const WorkReports = () => {
   const { user, logout } = useAuth();

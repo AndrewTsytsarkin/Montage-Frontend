@@ -1,10 +1,3 @@
-export interface User {
-  id: number;
-  login: string;
-  fullName: string;
-  role: "Admin" | "Worker";
-}
-
 export interface ProjectObject {
   id: number;
   name: string;
@@ -46,27 +39,6 @@ export interface WorkType {
   unit: string; // Ед. измерения: "шт"
 }
 
-export interface CreateWorkReportDto {
-  objectId: number;
-  workTypeId: number;
-  workDate: string;
-  quantity: number;
-  comment?: string;
-}
-
-export interface UpdateWorkReportDto {
-  quantity?: number;
-  comment?: string;
-}
-
-export interface WorkTypeDto {
-  id: number;
-  type: string;
-  subtype: string;
-  name: string;
-  unit: string;
-  pricePerUnit: number;  
-}
 
 export interface WorkReport {
   id: number;
@@ -86,4 +58,16 @@ export interface WorkReport {
   comment?: string;
   createdAt: string;
   updatedAt?: string;
+}
+
+
+
+
+
+export interface User {
+  id: number;
+  login: string;
+  fullName?: string;
+  role: 'Admin' | 'Worker';
+  createdAt?: string;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api/axios';
-import type { WorkTypeDto } from '../types';
- 
+import type { WorkTypeDto } from '../types/Dtos';
+
 const WorkTypes = () => {
   const [workTypes, setWorkTypes] = useState<WorkTypeDto[]>([]);
   const [selectedType, setSelectedType] = useState<string>('');

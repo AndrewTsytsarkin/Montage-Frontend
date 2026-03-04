@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
-import type { ProjectObject, WorkReport, WorkTypeDto } from "../types";
+import type { ProjectObject, WorkReport } from "../types";
+import type { WorkTypeDto } from "../types/Dtos";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
