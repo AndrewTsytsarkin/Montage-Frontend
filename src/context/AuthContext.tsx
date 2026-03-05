@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt_token");
-    
+
     if (token) {
       try {
         const decoded: JwtPayload = jwtDecode(token);
-        debugger
+
         if (decoded.exp * 1000 < Date.now()) {
           logout();
         } else {
@@ -46,7 +46,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         login,
         password,
       });
-              debugger
 
       const { token } = response.data;
       localStorage.setItem("jwt_token", token);

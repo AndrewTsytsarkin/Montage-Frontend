@@ -3,8 +3,33 @@ export interface ProjectObject {
   name: string;
   address: string;
   status: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  assignedUsers?: AssignedUser[];
+  availableUsers?: AvailableUser[];
 }
 
+export interface AssignedUser {
+  userId: number;
+  login: string;
+  fullName?: string;
+}
+
+export interface AvailableUser {
+  id: number;
+  login: string;
+  fullName?: string;
+  isAssigned: boolean;
+}
+
+export interface CreateUpdateObjectDto {
+  name: string;
+  address: string;
+  status: string;
+  description?: string;
+  assignedUserIds?: number[];
+}
 export interface JwtPayload {
   sub: string;
   nameid: string;

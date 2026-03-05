@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProjectedRoute";
 import { ObjectSelectionProvider } from "./context/src/context/ObjectSelectionContext";
 import AdminUsers from "./pages/AdminUsers";
 import AdminRoute from "./components/AdminRoute";
+import AdminObjects from "./pages/AdminObjects";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             {/* ✅ Только для админов */}
             <Route element={<AdminRoute />}>
               <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/objects" element={<AdminObjects />} />{" "}
+              {/* ✅ Новый маршрут */}
             </Route>
 
             <Route path="/" element={<Login />} />
