@@ -31,8 +31,12 @@ WORKDIR /app
 # Копируем package files
 COPY package*.json ./
 
+# 1. Фиксируем версию npm, чтобы избежать "через раз"
+RUN npm install -g npm@10.8.2
+
+ 
 # Устанавливаем только production зависимости + serve для раздачи файлов
-RUN npm ci --only=production && npm install -g serve
+RUN npm ci  omit=dev && npm install -g serve
 
 # Копируем собранное приложение из builder
 COPY --from=builder /app/dist ./dist
