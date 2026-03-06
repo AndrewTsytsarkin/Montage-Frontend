@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.VDS_HOST }}
           username: ${{ secrets.VDS_USER }}
           key: ${{ secrets.VDS_SSH_KEY }}
-          port: 22
+          port: "127.0.0.1:22:22"
           command_timeout: 10m
           script: |
 
