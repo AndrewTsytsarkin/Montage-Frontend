@@ -1,7 +1,7 @@
 # ============================================
 # ЭТАП 1: Сборка приложения (Build Stage)
 # ============================================
-FROM node:20-alpine AS builder
+FROM node:20-bookworm AS builder
 
 # Рабочая директория
 WORKDIR /app
@@ -12,8 +12,12 @@ ENV CI=true
 # Копируем package files
 COPY package*.json ./
 
-# Устанавливаем все зависимости (включая dev для сборки)
-RUN npm ci  
+ 
+
+# 2. Используем современный флаг для продакшена
+# --omit=dev вместо устаревшего --only=production
+RUN npm ci --omit=dev
+
 # Копируем исходный код
 COPY . .
 
@@ -31,12 +35,13 @@ WORKDIR /app
 # Копируем package files
 COPY package*.json ./
 
-# 1. Фиксируем версию npm, чтобы избежать "через раз"
-RUN npm install -g npm@10.8.2
+
 
  
 # Устанавливаем только production зависимости + serve для раздачи файлов
-RUN npm ci  omit=dev && npm install -g serve
+# 2. Используем современный флаг для продакшена
+# --omit=dev вместо устаревшего --only=production
+RUN npm ci --omit=dev && npm install -g serve
 
 # Копируем собранное приложение из builder
 COPY --from=builder /app/dist ./dist
