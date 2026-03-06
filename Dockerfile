@@ -14,9 +14,7 @@ COPY package*.json ./
 
  
 
-# 2. Используем современный флаг для продакшена
-# --omit=dev вместо устаревшего --only=production
-RUN npm ci --omit=dev
+RUN npm ci
 
 # Копируем исходный код
 COPY . .
